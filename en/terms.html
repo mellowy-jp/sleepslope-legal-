@@ -29,7 +29,7 @@
 <main>
   <p class="eyebrow">Sleep Slope</p>
   <h1>Terms of Use</h1>
-  <p class="date">Effective 4 August 2026</p>
+  <p class="date">Effective 4 August 2026 ・ Last revised 26 August 2026</p>
 
   <p>These terms govern your use of Sleep Slope (“the app”). By downloading or using the app, you agree to them.</p>
 
@@ -38,17 +38,29 @@
   <p><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">https://www.apple.com/legal/internet-services/itunes/dev/stdeula/</a></p>
 
   <h2>2. What the app does</h2>
-  <p>The app rings several alarms, spaced apart in time, across the stretch between when you would like to wake and the deadline you cannot miss, and records the outcome.</p>
+  <p>The app rings several alarms, spaced apart in time, across the stretch between when you would like to wake and the deadline you cannot miss, and records the outcome. The same mechanism can be used for repeating reminders that have nothing to do with waking up.</p>
 
   <h2>3. How the alarms behave</h2>
   <div class="callout">
-    <p><strong>The app's alarms use iOS local notifications. This is not a dedicated alarm-clock facility, and the following limits apply.</strong></p>
+    <p><strong>The app's alarms use AlarmKit, the operating system's own alarm facility, available from iOS 26. Behaviour differs with your environment.</strong></p>
   </div>
+  <p><strong>On iOS 26 or later, with alarm permission granted</strong></p>
   <ul>
-    <li>They respect your device's silent switch, volume setting, and Focus modes (including Do Not Disturb). Under some of these settings, no sound will play.</li>
+    <li>They ring regardless of the silent switch, the volume setting, and Focus modes including Do Not Disturb.</li>
+    <li>The deadline alarm may, if you have enabled it, ring again every five minutes up to twenty-four times until you stop it.</li>
+    <li>You can stop or snooze from the Lock Screen.</li>
+  </ul>
+  <p><strong>Before iOS 26, or without alarm permission</strong></p>
+  <ul>
+    <li>The app falls back to notifications, which are not a dedicated alarm-clock facility. The following limits then apply.</li>
+    <li>They respect your device's silent switch, volume setting, and Focus modes. Under some of these settings, no sound will play.</li>
     <li>The notification sound stops after a few dozen seconds. It does not ring continuously.</li>
-    <li>Notifications do not fire while the device is powered off.</li>
-    <li>Changes to the operating system or the state of your device may delay or suppress notifications.</li>
+  </ul>
+  <p><strong>In both cases</strong></p>
+  <ul>
+    <li>Alarms do not fire while the device is powered off.</li>
+    <li>Changes to the operating system or the state of your device may delay or suppress alarms.</li>
+    <li>The operating system limits how many alarms it will hold at once. If you set a great many, some may not be registered.</li>
   </ul>
   <p>The app does not guarantee that you will wake at any particular time. The developer is not liable for losses arising from failing to wake. <strong>On days when being late is not an option, do not rely on this app alone — use another method alongside it.</strong></p>
 
