@@ -1,24 +1,24 @@
 <!doctype html>
-<html lang="ja">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sleep Slope</title>
-<meta name="description" content="起きたい時刻と、絶対に起きなければいけない時刻。2つ決めるだけで、あいだのアラームは自動で並びます。起きた瞬間に残りは全部消える iPhone の目覚ましアプリ。">
-<link rel="canonical" href="https://sleepslope.mellowy.site/lp.html">
-<link rel="icon" href="./img/favicon.png" type="image/png" sizes="180x180">
-<link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+<meta name="description" content="The time you'd like to wake, and the time you absolutely have to be up. Set those two and Sleep Slope creates every alarm in between. The moment you're up, the rest disappear.">
+<link rel="canonical" href="https://sleepslope.mellowy.site/en/lp.html">
+<link rel="icon" href="../img/favicon.png" type="image/png" sizes="180x180">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sleep Slope">
-<meta property="og:title" content="Sleep Slope — アラームだらけの朝を終わらせる目覚ましアプリ">
-<meta property="og:description" content="起きたい時刻と、絶対に起きなければいけない時刻。2つ決めるだけで、あいだのアラームは自動で並びます。">
-<meta property="og:url" content="https://sleepslope.mellowy.site/lp.html">
-<meta property="og:image" content="https://sleepslope.mellowy.site/img/og.png">
+<meta property="og:title" content="Sleep Slope — end the mornings full of alarms">
+<meta property="og:description" content="Set your ideal time and your deadline. Sleep Slope creates every alarm in between, and clears the rest the moment you're up.">
+<meta property="og:url" content="https://sleepslope.mellowy.site/en/lp.html">
+<meta property="og:image" content="https://sleepslope.mellowy.site/img/og-en.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Sleep Slope — ”アラームだらけの朝”を終わらせる目覚ましアプリ">
+<meta property="og:image:alt" content="Sleep Slope — end the mornings full of alarms.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://sleepslope.mellowy.site/img/og.png">
+<meta name="twitter:image" content="https://sleepslope.mellowy.site/img/og-en.png">
 <meta name="theme-color" content="#0A0B0D">
 <style>
   :root{
@@ -92,8 +92,15 @@
     color:var(--mint); background:var(--mint-12); border:1px solid var(--mint-20);
     padding:5px 14px; border-radius:999px; margin:0 0 24px;
   }
-  h1{margin:0 0 26px;}
-  h1 img{width:min(540px,100%); height:auto; margin:0 auto;}
+  h1{
+    margin:0 0 26px; font-size:clamp(24px,7.4vw,54px); line-height:1.4;
+    font-weight:800; letter-spacing:-0.025em;
+  }
+  h1 .hl{
+    background:var(--mint); color:#06120D;
+    padding:0.04em 0.2em; border-radius:6px;
+    box-decoration-break:clone; -webkit-box-decoration-break:clone;
+  }
   .lede{
     max-width:620px; margin:0 auto; color:var(--fg-dim); font-size:clamp(15px,1.7vw,17px); line-height:2;
   }
@@ -104,7 +111,7 @@
   .badge:hover{opacity:.82;}
   .req{color:var(--fg-faint); font-size:13px; margin:0;}
 
-  /* hero: 純正の時計 → 解決！ → Sleep Slope */
+  /* hero: the stock Clock app -> Solved! -> Sleep Slope */
   .hero-flow{
     position:relative; margin:40px auto 0; width:100%; max-width:540px;
     display:grid; grid-template-columns:1fr 1fr;
@@ -118,8 +125,12 @@
   .stock-sm .stock-time{font-size:clamp(17px,4.4vw,21px);}
   .stock-sm .stock-sw{width:32px; height:19px;}
   .stock-sm .stock-sw::after{top:2px; right:2px; width:15px; height:15px;}
-  .flow-arrow{grid-area:arrow; padding-top:10px;}
-  .flow-arrow img{width:min(236px,100%); height:auto; margin-left:2%;}
+  .flow-arrow{grid-area:arrow; position:relative; padding-top:10px;}
+  .flow-arrow img{width:min(148px,56%); height:auto; margin-left:2%;}
+  .flow-solve{
+    position:absolute; right:0; top:12%;
+    color:var(--mint); font-weight:800; font-size:clamp(17px,4.6vw,26px); letter-spacing:-0.01em;
+  }
   .flow-after{grid-area:after; position:relative; margin:-4px auto 0; width:min(300px,72vw);}
   .flow-after::after{
     content:""; position:absolute; inset:auto -12% -6% -12%; height:120px;
@@ -293,10 +304,10 @@
 <header>
   <div class="wrap nav">
     <a class="brand" href="./lp.html">
-      <img src="./img/app-icon.png" alt="">
+      <img src="../img/app-icon.png" alt="">
       Sleep Slope
     </a>
-    <a class="nav-cta" href="https://apps.apple.com/jp/app/id6797730716">App Store で入手</a>
+    <a class="nav-cta" href="https://apps.apple.com/app/id6797730716">Get the app</a>
   </div>
 </header>
 
@@ -305,25 +316,26 @@
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="wrap hero-inner">
-      <p class="eyebrow">1タップで複数アラームを設定・解除</p>
+      <p class="eyebrow">Set and cancel several alarms in one go</p>
       <h1>
-        <img src="./img/headline.png" width="1120" height="473"
-             alt="”アラームだらけの朝”を終わらせる目覚ましアプリ">
+        <span class="hl">End the mornings</span><br>
+        <span class="hl">full of alarms.</span><br>
+        You set one alarm.
       </h1>
       <p class="lede">
-        起きたい時刻と、絶対に起きなければいけない時刻。<br>
-        その2つを決めるだけで、あいだのアラームは Sleep Slope が並べます。<br>
-        そして起きた瞬間に、残りは全部消えます。
+        The time you'd like to wake, and the time you absolutely have to be up.<br>
+        Set those two, and Sleep Slope creates every alarm in between.<br>
+        The moment you're up, the rest disappear.
       </p>
       <div class="cta-row">
-        <a class="badge" href="https://apps.apple.com/jp/app/id6797730716">
-          <img src="./img/appstore-badge.svg" alt="App Store からダウンロード">
+        <a class="badge" href="https://apps.apple.com/app/id6797730716">
+          <img src="../img/appstore-badge-en.svg" alt="Download on the App Store">
         </a>
-        <p class="req">iPhone・iOS 16.4 以上 ／ 無料（App内課金あり）</p>
+        <p class="req">iPhone · iOS 16.4 or later — free, with in-app purchases</p>
       </div>
       <div class="hero-flow">
         <div class="flow-before">
-          <p class="flow-cap">純正の時計アプリ</p>
+          <p class="flow-cap">The stock Clock app</p>
           <div class="stock stock-sm" aria-hidden="true">
             <div class="stock-row"><span class="stock-time">6:30</span><span class="stock-sw"></span></div>
             <div class="stock-row"><span class="stock-time">6:40</span><span class="stock-sw"></span></div>
@@ -333,11 +345,12 @@
         </div>
 
         <div class="flow-arrow">
-          <img src="./img/arrow.png" width="420" height="311" alt="解決！">
+          <img src="../img/arrow-en.png" width="300" height="338" alt="">
+          <span class="flow-solve">Solved!</span>
         </div>
 
         <div class="flow-after">
-          <div class="phone"><img src="./img/shot-alarm.png" alt="Sleep Slope のアラーム画面。理想 6:20 から限界 7:00 まで、10分ごとに5回鳴る設定"></div>
+          <div class="phone"><img src="../img/shot-alarm-en.png" alt="The Sleep Slope alarm screen: ideal 6:20, deadline 7:00, ringing five times every ten minutes"></div>
         </div>
       </div>
     </div>
@@ -347,15 +360,15 @@
   <section>
     <div class="wrap">
       <div class="sec-head rise">
-        <p class="tag">なくなるもの</p>
-        <h2>毎晩オン、毎朝オフ。<br>あの作業が、まるごと消える。</h2>
-        <p>沢山のアラームを並べる人が抱える、面倒な作業がなくなります。</p>
+        <p class="tag">What goes away</p>
+        <h2>On every night, off every morning.<br>That whole chore, gone.</h2>
+        <p>The chore that comes with stacking alarms is gone.</p>
       </div>
 
       <div class="ba rise">
         <div class="ba-col">
-          <p class="ba-label">これまで</p>
-          <p class="ba-title">5件のアラームを、手で作る</p>
+          <p class="ba-label">Until now</p>
+          <p class="ba-title">Five alarms, one at a time</p>
           <div class="stock">
             <div class="stock-row"><span class="stock-time">6:20</span><span class="stock-sw"></span></div>
             <div class="stock-row"><span class="stock-time">6:30</span><span class="stock-sw"></span></div>
@@ -363,26 +376,26 @@
             <div class="stock-row"><span class="stock-time">6:50</span><span class="stock-sw"></span></div>
             <div class="stock-row"><span class="stock-time">7:00</span><span class="stock-sw"></span></div>
           </div>
-          <p class="ba-note">早く起きられた朝ほど、消し忘れたアラームが残ります。6時に起きたのに、6時20分、6時40分、7時と鳴り続ける。うまくいった朝ほどうんざりする、あの理不尽。</p>
+          <p class="ba-note">The mornings you woke early were always the ones with alarms left behind. Up at six, and still ringing at 6:20, 6:40, 7:00. The better the morning went, the more it punished you.</p>
         </div>
 
         <div class="ba-col after">
           <p class="ba-label">Sleep Slope</p>
-          <p class="ba-title">アラームは、1件だけ</p>
+          <p class="ba-title">One alarm. That is all.</p>
           <div class="plan-card">
             <div class="plan-top">
-              <div class="plan-name">平日 <span>一 月・火・水・木・金</span></div>
+              <div class="plan-name">Weekdays <span>– Mon,Tue,Wed,Thu,Fri</span></div>
               <div class="plan-sw"></div>
             </div>
             <div class="plan-times">
-              <div class="plan-t"><div class="lb">理想</div><div class="tm">6:20</div></div>
+              <div class="plan-t"><div class="lb">Ideal</div><div class="tm">6:20</div></div>
               <div class="plan-arrow">▶</div>
-              <div class="plan-t"><div class="lb">限界</div><div class="tm">7:00</div></div>
+              <div class="plan-t"><div class="lb">Deadline</div><div class="tm">7:00</div></div>
             </div>
             <div class="plan-rail">
               <div class="rail-head">
-                <span>鳴る回数</span>
-                <span><span class="pill">10分ごと</span> &nbsp;<b>5回</b></span>
+                <span>Rings</span>
+                <span><span class="pill">Every 10 min</span> &nbsp;<b>5×</b></span>
               </div>
               <div class="rail">
                 <div class="rail-line"></div>
@@ -395,7 +408,7 @@
               <div class="rail-times"><span>6:20</span><span>6:30</span><span>6:40</span><span>6:50</span><b>7:00</b></div>
             </div>
           </div>
-          <p class="ba-note">理想と限界を決めれば、あいだは自動で埋まります。夜に足す手間も、朝に消す手間もありません。</p>
+          <p class="ba-note">Set your ideal and your deadline, and everything in between fills itself in. Nothing to add at night, nothing to clear in the morning.</p>
         </div>
       </div>
     </div>
@@ -405,41 +418,41 @@
   <section style="background:#0D0F12; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
     <div class="wrap">
       <div class="sec-head rise">
-        <p class="tag">できること</p>
-        <h2>決めるのは2つだけ。<br>あとは、朝の自分に任せる。</h2>
-        <p>必要なぶんだけ鳴って、起きたら止まる。それ以上のことはしません。</p>
+        <p class="tag">What it does</p>
+        <h2>Two decisions.<br>The rest is up to tomorrow morning.</h2>
+        <p>It rings as many times as you need, and stops when you are up. It does nothing beyond that.</p>
       </div>
 
       <div class="grid">
         <div class="card rise">
           <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="9"/></svg></div>
-          <h3>理想と限界の2つだけ</h3>
-          <p>起きたい時刻と、絶対に起きなければいけない時刻。その2つを決めれば、あいだのアラームは Sleep Slope が用意します。1件ずつ足す作業は必要ありません。</p>
+          <h3>An ideal and a deadline</h3>
+          <p>The time you would like to wake, and the time you absolutely have to be up. Set those two and Sleep Slope creates every alarm in between. Adding them one at a time is over.</p>
         </div>
         <div class="card rise">
           <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 12h16"/><circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="17" cy="12" r="2"/></svg></div>
-          <h3>鳴る回数も間隔も、好きなだけ</h3>
-          <p>3回でも10回でも。5分おきでも20分おきでも。無料のまま、回数・間隔・限界時刻に上限はありません。曜日ごとの繰り返しも設定できます。</p>
+          <h3>As many rings, as close together, as you like</h3>
+          <p>Three alarms or ten. Five minutes apart or twenty. No limit on the count, the spacing or the deadline — for free. Repeat by weekday, too.</p>
         </div>
         <div class="card rise">
           <div class="ico"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
-          <h3>起きた瞬間、残りは全部消える</h3>
-          <p>アラームを止めたあとの「起きた」のひと押しで、その日の残りが全て止まります。設定画面を開いて一つずつ消す必要はありません。</p>
+          <h3>The moment you are up, the rest disappear</h3>
+          <p>Stop the alarm, tap “I’m up”, and the rest of the day’s alarms are off. No opening the settings screen, no deleting them one by one.</p>
         </div>
         <div class="card rise">
           <div class="ico"><svg viewBox="0 0 24 24"><path d="M6 9v6h3l4 3V6L9 9H6z"/><path d="M17 9c.8 1 .8 5 0 6"/></svg></div>
-          <h3>消音スイッチも、集中モードも貫く</h3>
-          <p>iOS 26 以降では OS のアラーム機能で鳴ります。消音スイッチをオンにしていても、おやすみモード中でも鳴り、ロック画面からそのまま止められます。</p>
+          <h3>Through the silent switch, and through Focus</h3>
+          <p>From iOS 26 it rings with the operating system’s own alarm facility. It rings with the silent switch on and during Do Not Disturb, and you can stop it straight from the Lock Screen.</p>
         </div>
         <div class="card rise">
           <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 016 6c0 4 2 5 2 5H4s2-1 2-5a6 6 0 016-6z"/><path d="M10 19a2 2 0 004 0"/></svg></div>
-          <h3>限界時刻だけ強い音に</h3>
-          <p>普段は穏やかな音で。限界時刻を過ぎたら、はっきり起こしにいく音に切り替えられます。アラームごとに選べて、無料です。</p>
+          <h3>A harder sound, for the deadline only</h3>
+          <p>Something quiet for the alarms along the way, and something that will not be slept through once your deadline has passed. Chosen per alarm, and free.</p>
         </div>
         <div class="card rise">
           <div class="ico"><svg viewBox="0 0 24 24"><path d="M5 19V10"/><path d="M12 19V5"/><path d="M19 19v-6"/></svg></div>
-          <h3>何回目で起きたかが残る</h3>
-          <p>起きた時刻と、限界時刻までどれだけ余裕があったかを自動で記録します。振り返るために何かを操作する必要はありません。</p>
+          <h3>It remembers which alarm worked</h3>
+          <p>It records the time you got up and how much room you had left before your deadline. There is nothing to switch on and nothing to do later.</p>
         </div>
       </div>
     </div>
@@ -449,24 +462,24 @@
   <section>
     <div class="wrap">
       <div class="sec-head rise">
-        <p class="tag">使う流れ</p>
-        <h2>夜に1件つくって、<br>朝は止めるだけ。</h2>
+        <p class="tag">How it goes</p>
+        <h2>Make one at night.<br>In the morning, just stop it.</h2>
       </div>
       <div class="screens">
         <div class="screen rise">
-          <div class="phone"><img src="./img/shot-edit.png" alt="アラームを編集する画面。理想と限界の時刻、鳴る回数、音を選べる" loading="lazy"></div>
-          <h3>1. 幅を決める</h3>
-          <p>理想と限界、鳴る回数。ここだけ決めれば、あいだの時刻は自動で並びます。</p>
+          <div class="phone"><img src="../img/shot-edit-en.png" alt="The edit screen: ideal and deadline times, how many rings, and the sound" loading="lazy"></div>
+          <h3>1. Set the range</h3>
+          <p>Ideal, deadline, and how many times it rings. Decide those and the times in between line up on their own.</p>
         </div>
         <div class="screen rise">
-          <div class="phone"><img src="./img/shot-ring.png" alt="アラームが鳴っている画面。1回目 / 5回、限界時刻まであと40分と表示されている" loading="lazy"></div>
-          <h3>2. 残りが見える</h3>
-          <p>いま何回目で、限界まであと何分か。わかったうえで、次の回に送れます。</p>
+          <div class="phone"><img src="../img/shot-ring-en.png" alt="The ringing screen: 1 of 5, with 40 minutes left until the deadline" loading="lazy"></div>
+          <h3>2. You can see what is left</h3>
+          <p>Which ring you are on, and how long until your deadline. You push it to the next one knowing both.</p>
         </div>
         <div class="screen rise">
-          <div class="phone"><img src="./img/shot-log-week.png" alt="ログ画面。早起き連続4日、平均起床 6:30、早起き率 86% と、日ごとの記録が並んでいる" loading="lazy"></div>
-          <h3>3. 記録が残る</h3>
-          <p>何回目の何時に起きたか。操作しなくても、そのまま残ります。</p>
+          <div class="phone"><img src="../img/shot-log-week-en.png" alt="The log screen: four early mornings in a row, an average of 6:30, and 86% before the deadline" loading="lazy"></div>
+          <h3>3. It stays on record</h3>
+          <p>Which alarm you got up on, and at what time. It stays without you doing anything.</p>
         </div>
       </div>
     </div>
@@ -475,15 +488,15 @@
   <!-- ============ LOG ============ -->
   <section style="background:#0D0F12; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
     <div class="wrap split rise">
-      <div class="ph"><div class="phone"><img src="./img/shot-log-month.png" alt="ログの月表示。カレンダーで一ヶ月ぶんの起き方が見られる" loading="lazy"></div></div>
+      <div class="ph"><div class="phone"><img src="../img/shot-log-month-en.png" alt="The monthly log: a calendar of how a month of mornings went" loading="lazy"></div></div>
       <div>
-        <p class="tag">ログ</p>
-        <h2>自分の起床傾向がわかる。</h2>
-        <p>限界時刻までどれだけ余裕があったかを、日ごとに記録します。自分の起床データを客観的に見ることで、自己理解を促進します。</p>
+        <p class="tag">Log</p>
+        <h2>See how your mornings go.</h2>
+        <p>It records how much room you had before your deadline, day by day. Seeing your own wake-up data plainly is what makes it easier to understand your mornings.</p>
         <ul class="ticks">
-          <li>何回目のアラームで起きたか</li>
-          <li>限界時刻より早く起きられた日の連続</li>
-          <li>記録は端末の中だけ。外部に送信しません</li>
+          <li>Which alarm you got up on</li>
+          <li>Days in a row you were up before your deadline</li>
+          <li>Records stay on your device. Nothing is sent anywhere</li>
         </ul>
       </div>
     </div>
@@ -492,15 +505,15 @@
   <!-- ============ OTHER ============ -->
   <section>
     <div class="wrap split rev rise">
-      <div class="ph"><div class="phone"><img src="./img/shot-other.png" alt="その他のアラーム。赤ちゃんのミルク 3時間ごと、薬を飲む 6時間ごとのカードが並んでいる" loading="lazy"></div></div>
+      <div class="ph"><div class="phone"><img src="../img/shot-other-en.png" alt="Other alarms: a baby’s feeds every three hours, medicine every six hours" loading="lazy"></div></div>
       <div>
-        <p class="tag">起きるため以外にも</p>
-        <h2>一日に何度も、<br>知らせてほしいことに。</h2>
-        <p>薬を飲む、ミルクをあげる、水分をとる、姿勢を直す。開始と終了を決めれば、そのあいだを等間隔で鳴らします。</p>
+        <p class="tag">Not only for waking up</p>
+        <h2>For anything you want telling about<br>several times a day.</h2>
+        <p>Medicine. A baby’s feed. Water. Getting up from your desk. Set a start and an end, and it rings evenly across the span.</p>
         <ul class="ticks">
-          <li>8:00 から 23:00 まで、3時間ごとに6回</li>
-          <li>曜日ごとの繰り返しも設定できる</li>
-          <li>起床のアラームとは分けて並ぶ</li>
+          <li>8:00 AM to 11:00 PM — six times, every three hours</li>
+          <li>Repeat by weekday, too</li>
+          <li>Listed separately from your wake-up alarms</li>
         </ul>
       </div>
     </div>
@@ -511,15 +524,15 @@
     <div class="wrap">
       <div class="pro rise">
         <p class="tag">Sleep Slope Pro</p>
-        <h2>無料のままでも、<br>何度でも鳴ります。</h2>
-        <p>回数も間隔も限界時刻も、無料で上限はありません。Pro は基本を解くためのものではなく、増やすためのものです。</p>
+        <h2>Without Pro, it still rings<br>as often as you like.</h2>
+        <p>The count, the spacing and the deadline have no limit for free. Pro is not for unlocking the basics — it is for having more of it.</p>
         <div class="pro-list">
-          <div>アラームをいくつでも作れる</div>
-          <div>記録を全期間さかのぼって見られる</div>
-          <div>アラーム音が2種類から8種類に</div>
-          <div>起きたい時刻から逆算して、寝る時間をお知らせ</div>
+          <div>As many alarms as you need</div>
+          <div>Your full history, with trends over time</div>
+          <div>Eight sounds to choose from, instead of two</div>
+          <div>A nudge when it is time to go to bed, counted back from your wake time</div>
         </div>
-        <p class="pro-note">Pro は自動更新サブスクリプションです。料金と期間、無料お試しの有無は、アプリ内の購入画面に表示されます。解約は 設定 ＞ ご自身の名前 ＞ サブスクリプション からいつでも行えます。</p>
+        <p class="pro-note">Pro is an auto-renewing subscription. Price, duration, and any free trial are shown on the purchase screen in the app. You can cancel any time in Settings &gt; your name &gt; Subscriptions.</p>
       </div>
     </div>
   </section>
@@ -528,34 +541,34 @@
   <section style="padding-top:0;">
     <div class="wrap faq">
       <div class="sec-head rise">
-        <p class="tag">よくある質問</p>
-        <h2>気になるところ</h2>
+        <p class="tag">FAQ</p>
+        <h2>Questions people ask</h2>
       </div>
 
       <div class="rise">
         <details>
-          <summary>消音にしていても鳴りますか</summary>
-          <p>iOS 26 以降では、Sleep Slope のアラームは OS のアラーム機能で鳴ります。消音スイッチをオンにしていても、おやすみモード中でも鳴り、ロック画面からそのまま止めたりスヌーズにできます。iOS 26 より前では通知として鳴るため、消音スイッチや集中モードの設定に従い、通知音は数十秒で停止します。</p>
+          <summary>Does it ring on silent?</summary>
+          <p>From iOS 26, Sleep Slope uses the operating system’s own alarm facility. It rings with the silent switch on and during Do Not Disturb, and you can stop it or snooze it from the Lock Screen. On iOS versions before 26 it rings through notifications: it follows your silent switch and Focus settings, and the sound stops after a few dozen seconds.</p>
         </details>
         <details>
-          <summary>限界時刻に起きられなかったら</summary>
-          <p>限界時刻を過ぎると、止めるまで5分おきに鳴り直します。一発に賭けない、というのはそういうことです。</p>
+          <summary>What if I sleep past my deadline?</summary>
+          <p>Once your deadline has passed, it rings again every five minutes until you stop it. That is what not betting the morning on one alarm actually means.</p>
         </details>
         <details>
-          <summary>Apple Watch でも鳴りますか</summary>
-          <p>鳴ります。Watch 用のアプリを入れる必要はなく、アプリ側の設定もありません。鳴る時刻に Watch が iPhone とつながっていれば、手首で気づいて、そのまま止められます。</p>
+          <summary>Does it ring on an Apple Watch?</summary>
+          <p>It does. There is no Watch app to install and nothing to set up. If your Watch is connected to your iPhone when the alarm rings, you feel it on your wrist and can stop it from there.</p>
         </details>
         <details>
-          <summary>記録は外部に送られますか</summary>
-          <p>アカウント登録はありません。起床の記録と設定は端末内にのみ保存され、外部のサーバーには送信していません。詳しくは<a href="./privacy.html">プライバシーポリシー</a>をご覧ください。</p>
+          <summary>Is my data sent anywhere?</summary>
+          <p>There is no account. Your wake-up records and settings are stored only on your device and are not sent to any server. See the <a href="./privacy.html">Privacy Policy</a> for details.</p>
         </details>
         <details>
-          <summary>機種変更したら記録は移せますか</summary>
-          <p>記録は端末内にのみ保存しているため、端末をまたいだ引き継ぎには対応していません。端末のバックアップ（iCloud など）を有効にしている場合は、そのバックアップに含まれます。</p>
+          <summary>Can I move my records to a new phone?</summary>
+          <p>Records are stored only on the device, so there is no transfer between devices. If you have device backup (iCloud and the like) switched on, they are included in that backup.</p>
         </details>
         <details>
-          <summary>うまく鳴らないときは</summary>
-          <p><a href="./index.html">サポートページ</a>に、鳴らないときの確認項目と問い合わせ先をまとめています。</p>
+          <summary>It did not ring</summary>
+          <p>The <a href="./index.html">support page</a> lists what to check, and where to get in touch.</p>
         </details>
       </div>
     </div>
@@ -564,12 +577,12 @@
   <!-- ============ CLOSING ============ -->
   <section class="closing" style="padding-top:0;">
     <div class="wrap rise">
-      <h2>明日の朝から、<br>アラームは1件でいい。</h2>
+      <h2>From tomorrow morning,<br>one alarm is enough.</h2>
       <div class="cta-row">
-        <a class="badge" href="https://apps.apple.com/jp/app/id6797730716">
-          <img src="./img/appstore-badge.svg" alt="App Store からダウンロード" loading="lazy">
+        <a class="badge" href="https://apps.apple.com/app/id6797730716">
+          <img src="../img/appstore-badge-en.svg" alt="Download on the App Store" loading="lazy">
         </a>
-        <p class="req">iPhone・iOS 16.4 以上 ／ 無料（App内課金あり）</p>
+        <p class="req">iPhone · iOS 16.4 or later — free, with in-app purchases</p>
       </div>
     </div>
   </section>
@@ -579,14 +592,13 @@
 <footer>
   <div class="wrap">
     <div class="foot-top">
-      <a class="brand" href="./lp.html"><img src="./img/app-icon.png" alt="">Sleep Slope</a>
+      <a class="brand" href="./lp.html"><img src="../img/app-icon.png" alt="">Sleep Slope</a>
       <nav class="foot-links">
-        <a href="./index.html">サポート</a>
-        <a href="./privacy.html">プライバシーポリシー</a>
-        <a href="./terms.html">利用規約</a>
-        <a href="./tokushoho.html">特定商取引法に基づく表記</a>
-        <a href="mailto:info@mellowy.site">お問い合わせ</a>
-        <a href="./en/">English</a>
+        <a href="./index.html">Support</a>
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./terms.html">Terms of Use</a>
+        <a href="mailto:info@mellowy.site">Contact</a>
+        <a href="../lp.html">日本語</a>
       </nav>
     </div>
     <p class="copy">© 2026 Tomoe Tsubota</p>
