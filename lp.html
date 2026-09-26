@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sleep Slope</title>
+<meta name="description" content="起きたい時刻と、絶対に起きなければいけない時刻。2つ決めるだけで、あいだのアラームは自動で並びます。起きた瞬間に残りは全部消える iPhone の目覚ましアプリ。">
+<link rel="canonical" href="https://sleepslope.mellowy.site/lp.html">
+<link rel="icon" href="./img/app-icon.png" type="image/png" sizes="180x180">
+<link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sleep Slope">
+<meta property="og:title" content="Sleep Slope — アラームだらけの朝を終わらせる目覚ましアプリ">
+<meta property="og:description" content="起きたい時刻と、絶対に起きなければいけない時刻。2つ決めるだけで、あいだのアラームは自動で並びます。">
+<meta property="og:url" content="https://sleepslope.mellowy.site/lp.html">
+<meta property="og:image" content="https://sleepslope.mellowy.site/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sleep Slope — ”アラームだらけの朝”を終わらせる目覚ましアプリ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sleepslope.mellowy.site/img/og.png">
+<meta name="theme-color" content="#0A0B0D">
+<style>
+  :root{
+    --bg:#0A0B0D;
+    --bg-elev:#15171C;
+    --bg-card:#1B1E24;
+    --fg:#E8EAED;
+    --fg-dim:#9AA0A7;
+    --fg-faint:#6B7178;
+    --mint:#46E8B0;
+    --mint-dim:#2ECF98;
+    --mint-12:rgba(70,232,176,0.12);
+    --mint-20:rgba(70,232,176,0.20);
+    --orange:#FF9F0A;
+    --line:rgba(255,255,255,0.08);
+    --line-strong:rgba(255,255,255,0.16);
+    --radius:20px;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP","Segoe UI",sans-serif;
+    font-size:16px; line-height:1.9; -webkit-text-size-adjust:100%;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  .wrap{width:100%; max-width:var(--maxw); margin:0 auto; padding:0 20px;}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,11,13,0.72); backdrop-filter:saturate(180%) blur(16px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; height:60px;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:700; letter-spacing:-0.01em;}
+  .brand img{
+    width:30px; height:30px; border-radius:8px; flex:none;
+    border:1px solid rgba(255,255,255,0.12);
+    box-shadow:0 1px 8px rgba(0,0,0,0.5);
+  }
+  footer .brand img{width:26px; height:26px; border-radius:7px;}
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:6px;
+    background:var(--mint); color:#06120D; text-decoration:none;
+    font-size:14px; font-weight:700; padding:9px 16px; border-radius:999px;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--mint-dim);}
+  @media (max-width:379px){
+    .wrap{padding:0 16px;}
+    .brand{font-size:15px; gap:8px;}
+    .brand img{width:26px; height:26px;}
+    .nav-cta{font-size:12.5px; padding:8px 12px;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{position:relative; overflow:hidden; padding:72px 0 0;}
+  .hero::before{
+    content:""; position:absolute; left:50%; top:-320px; transform:translateX(-50%);
+    width:900px; height:640px; border-radius:50%;
+    background:radial-gradient(closest-side, rgba(70,232,176,0.16), rgba(70,232,176,0));
+    pointer-events:none;
+  }
+  .hero-inner{position:relative; text-align:center;}
+  .eyebrow{
+    display:inline-block; font-size:13px; font-weight:600; letter-spacing:0.02em;
+    color:var(--mint); background:var(--mint-12); border:1px solid var(--mint-20);
+    padding:5px 14px; border-radius:999px; margin:0 0 24px;
+  }
+  h1{margin:0 0 26px;}
+  h1 img{width:min(540px,100%); height:auto; margin:0 auto;}
+  .lede{
+    max-width:620px; margin:0 auto; color:var(--fg-dim); font-size:clamp(15px,1.7vw,17px); line-height:2;
+  }
+  @media (max-width:719px){ .lede br{display:none;} }
+  .cta-row{display:flex; flex-direction:column; align-items:center; gap:12px; margin:36px 0 8px;}
+  .badge{display:inline-block; transition:opacity .15s;}
+  .badge img{height:56px; width:auto;}
+  .badge:hover{opacity:.82;}
+  .req{color:var(--fg-faint); font-size:13px; margin:0;}
+
+  /* hero: 純正の時計 → 解決！ → Sleep Slope */
+  .hero-flow{
+    position:relative; margin:40px auto 0; width:100%; max-width:540px;
+    display:grid; grid-template-columns:1fr 1fr;
+    grid-template-areas:"before arrow" "after after";
+    align-items:start; text-align:left;
+  }
+  .flow-before{grid-area:before; padding-right:8px;}
+  .flow-cap{font-size:12px; color:var(--fg-faint); margin:0 0 8px;}
+  .stock-sm{padding:2px 12px;}
+  .stock-sm .stock-row{padding:8px 0;}
+  .stock-sm .stock-time{font-size:clamp(17px,4.4vw,21px);}
+  .stock-sm .stock-sw{width:32px; height:19px;}
+  .stock-sm .stock-sw::after{top:2px; right:2px; width:15px; height:15px;}
+  .flow-arrow{grid-area:arrow; padding-top:10px;}
+  .flow-arrow img{width:min(236px,100%); height:auto; margin-left:2%;}
+  .flow-after{grid-area:after; position:relative; margin:-4px auto 0; width:min(300px,72vw);}
+  .flow-after::after{
+    content:""; position:absolute; inset:auto -12% -6% -12%; height:120px;
+    background:linear-gradient(to bottom, rgba(10,11,13,0), var(--bg));
+  }
+
+  /* device frame */
+  .phone{
+    border:1px solid var(--line-strong); border-radius:34px; padding:6px;
+    background:#000; box-shadow:0 30px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.03);
+  }
+  .phone img{border-radius:28px;}
+
+  /* ---------- section shell ---------- */
+  section{padding:88px 0;}
+  .sec-head{text-align:center; margin:0 auto 48px; max-width:660px;}
+  h2{font-size:clamp(24px,3.4vw,36px); line-height:1.5; font-weight:700; letter-spacing:-0.02em; margin:0 0 14px; text-wrap:balance;}
+  .sec-head p{color:var(--fg-dim); margin:0; font-size:15px;}
+  .tag{
+    display:inline-block; font-size:12px; font-weight:700; letter-spacing:0.08em;
+    color:var(--mint); margin:0 0 12px;
+  }
+
+  /* ---------- before / after ---------- */
+  .ba{display:grid; grid-template-columns:1fr; gap:20px; align-items:stretch;}
+  .ba-col{
+    background:var(--bg-elev); border:1px solid var(--line); border-radius:var(--radius); padding:24px 20px;
+  }
+  .ba-col.after{border-color:var(--mint-20); background:linear-gradient(180deg, rgba(70,232,176,0.06), var(--bg-elev) 42%);}
+  .ba-label{font-size:13px; font-weight:700; color:var(--fg-faint); margin:0 0 4px;}
+  .ba-col.after .ba-label{color:var(--mint);}
+  .ba-title{font-size:19px; font-weight:700; margin:0 0 18px; letter-spacing:-0.01em;}
+  .ba-note{color:var(--fg-dim); font-size:14px; margin:18px 0 0; line-height:1.85;}
+
+  .stock{background:#000; border-radius:14px; padding:4px 14px; border:1px solid var(--line);}
+  .stock-row{display:flex; align-items:center; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.07);}
+  .stock-row:last-child{border-bottom:0;}
+  .stock-time{font-size:26px; font-weight:300; letter-spacing:-0.01em; color:#fff; font-variant-numeric:tabular-nums;}
+  .stock-sw{width:40px; height:24px; border-radius:999px; background:#34C759; position:relative; flex:none;}
+  .stock-sw::after{content:""; position:absolute; top:2px; right:2px; width:20px; height:20px; border-radius:50%; background:#fff;}
+
+  .plan-card{background:var(--bg-card); border:1px solid var(--line); border-radius:16px; padding:18px;}
+  .plan-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .plan-name{font-size:17px; font-weight:700;}
+  .plan-name span{color:var(--fg-faint); font-size:13px; font-weight:400; margin-left:6px;}
+  .plan-sw{width:44px; height:26px; border-radius:999px; background:var(--mint); position:relative; flex:none; box-shadow:0 0 14px var(--mint-20);}
+  .plan-sw::after{content:""; position:absolute; top:3px; right:3px; width:20px; height:20px; border-radius:50%; background:#000;}
+  .plan-times{display:flex; align-items:center; gap:14px;}
+  .plan-t{flex:1;}
+  .plan-t .lb{font-size:12px; color:var(--fg-dim); margin-bottom:2px;}
+  .plan-t .tm{font-size:34px; font-weight:700; letter-spacing:-0.03em; font-variant-numeric:tabular-nums; line-height:1.1;}
+  .plan-arrow{color:var(--mint); font-size:13px;}
+  .plan-rail{margin-top:20px; padding-top:16px; border-top:1px solid var(--line);}
+  .rail-head{display:flex; align-items:center; justify-content:space-between; font-size:14px; margin-bottom:16px;}
+  .rail-head .pill{background:rgba(255,255,255,0.06); border-radius:999px; padding:3px 12px; font-size:13px; color:var(--fg-dim);}
+  .rail-head b{font-size:17px;}
+  .rail{position:relative; height:12px; margin:0 6px;}
+  .rail-line{position:absolute; top:5px; left:0; right:0; height:2px; background:linear-gradient(90deg, rgba(255,255,255,0.18), var(--mint));}
+  .rail-dot{position:absolute; top:1px; width:10px; height:10px; border-radius:50%; background:var(--mint-dim); transform:translateX(-50%);}
+  .rail-dot.first{background:transparent; border:2px solid var(--mint); top:0; width:12px; height:12px;}
+  .rail-dot.last{background:var(--mint); box-shadow:0 0 10px var(--mint-20); top:-1px; width:14px; height:14px;}
+  .rail-times{display:flex; justify-content:space-between; font-size:12px; color:var(--fg-faint); margin-top:10px;}
+  .rail-times b{color:var(--mint); font-weight:600;}
+
+  /* ---------- feature grid ---------- */
+  .grid{display:grid; grid-template-columns:1fr; gap:14px;}
+  .card{
+    background:var(--bg-elev); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px 22px;
+  }
+  .card .ico{
+    width:40px; height:40px; border-radius:11px; background:var(--mint-12);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .card .ico svg{width:20px; height:20px; stroke:var(--mint); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;}
+  .card h3{font-size:17px; font-weight:700; margin:0 0 8px; letter-spacing:-0.01em;}
+  .card p{color:var(--fg-dim); font-size:14px; line-height:1.9; margin:0;}
+
+  /* ---------- screens ---------- */
+  .screens{display:grid; grid-template-columns:1fr; gap:40px;}
+  .screen{text-align:center;}
+  .screen .phone{width:min(260px,68vw); margin:0 auto 20px;}
+  .screen h3{font-size:18px; font-weight:700; margin:0 0 8px;}
+  .screen p{color:var(--fg-dim); font-size:14px; line-height:1.9; margin:0 auto; max-width:320px;}
+
+  /* ---------- split ---------- */
+  .split{display:grid; grid-template-columns:1fr; gap:36px; align-items:center;}
+  .split .phone{width:min(260px,66vw); margin:0 auto;}
+  .split h2{font-size:clamp(23px,3vw,32px);}
+  .split p{color:var(--fg-dim); margin:0 0 14px;}
+  .ticks{list-style:none; padding:0; margin:18px 0 0;}
+  .ticks li{position:relative; padding-left:26px; color:var(--fg-dim); font-size:15px; margin-bottom:10px; line-height:1.8;}
+  .ticks li::before{
+    content:""; position:absolute; left:4px; top:12px; width:7px; height:7px; border-radius:50%;
+    background:var(--mint);
+  }
+
+  /* ---------- pro ---------- */
+  .pro{
+    background:linear-gradient(180deg, rgba(70,232,176,0.07), var(--bg-elev) 55%);
+    border:1px solid var(--mint-20); border-radius:24px; padding:40px 24px; text-align:center;
+  }
+  .pro h2{margin-bottom:10px;}
+  .pro > p{color:var(--fg-dim); margin:0 auto 28px; max-width:520px; font-size:15px;}
+  .pro-list{display:grid; grid-template-columns:1fr; gap:10px; max-width:560px; margin:0 auto; text-align:left;}
+  .pro-list div{
+    background:rgba(255,255,255,0.04); border:1px solid var(--line); border-radius:14px;
+    padding:14px 18px; font-size:15px;
+  }
+  .pro-note{color:var(--fg-faint); font-size:13px; margin:24px auto 0; max-width:560px; line-height:1.9;}
+
+  /* ---------- faq ---------- */
+  .faq{max-width:720px; margin:0 auto;}
+  details{border-bottom:1px solid var(--line); padding:4px 0;}
+  summary{
+    list-style:none; cursor:pointer; padding:18px 36px 18px 0; position:relative;
+    font-size:16px; font-weight:600;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{
+    content:""; position:absolute; right:8px; top:50%; width:9px; height:9px;
+    border-right:2px solid var(--fg-faint); border-bottom:2px solid var(--fg-faint);
+    transform:translateY(-70%) rotate(45deg); transition:transform .2s;
+  }
+  details[open] summary::after{transform:translateY(-30%) rotate(225deg);}
+  details p{color:var(--fg-dim); font-size:14.5px; margin:0 0 20px; line-height:1.95;}
+  details a{color:var(--mint);}
+
+  /* ---------- closing ---------- */
+  .closing{text-align:center;}
+  .closing h2{margin-bottom:20px;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line); padding:44px 0 56px; color:var(--fg-faint); font-size:14px;}
+  .foot-top{display:flex; flex-direction:column; gap:24px; align-items:flex-start;}
+  .foot-links{display:flex; flex-wrap:wrap; gap:14px 24px;}
+  .foot-links a{color:var(--fg-dim); text-decoration:none;}
+  .foot-links a:hover{color:var(--mint);}
+  .copy{margin:32px 0 0; font-size:13px;}
+
+  /* ---------- motion ---------- */
+  .rise{opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease;}
+  .rise.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .rise{opacity:1; transform:none; transition:none;}
+  }
+
+  /* ---------- responsive ---------- */
+  @media (min-width:720px){
+    .ba{grid-template-columns:1fr 1fr; gap:24px;}
+    .ba-col{padding:28px 26px;}
+    .grid{grid-template-columns:1fr 1fr; gap:18px;}
+    .screens{grid-template-columns:repeat(3,1fr); gap:28px;}
+    .split{grid-template-columns:1fr 1fr; gap:56px;}
+    .split.rev .ph{order:2;}
+    .pro-list{grid-template-columns:1fr 1fr;}
+    .pro{padding:56px 40px;}
+    .foot-top{flex-direction:row; justify-content:space-between; align-items:center;}
+    section{padding:112px 0;}
+    .hero{padding:96px 0 0;}
+  }
+  @media (min-width:960px){
+    .grid{grid-template-columns:repeat(3,1fr);}
+    .hero-flow{max-width:600px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="./lp.html">
+      <img src="./img/app-icon.png" alt="">
+      Sleep Slope
+    </a>
+    <a class="nav-cta" href="https://apps.apple.com/jp/app/id6797730716">App Store で入手</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <p class="eyebrow">1タップで複数アラームを設定・解除</p>
+      <h1>
+        <img src="./img/headline.png" width="1120" height="473"
+             alt="”アラームだらけの朝”を終わらせる目覚ましアプリ">
+      </h1>
+      <p class="lede">
+        起きたい時刻と、絶対に起きなければいけない時刻。<br>
+        その2つを決めるだけで、あいだのアラームは Sleep Slope が並べます。<br>
+        そして起きた瞬間に、残りは全部消えます。
+      </p>
+      <div class="cta-row">
+        <a class="badge" href="https://apps.apple.com/jp/app/id6797730716">
+          <img src="./img/appstore-badge.svg" alt="App Store からダウンロード">
+        </a>
+        <p class="req">iPhone・iOS 16.4 以上 ／ 無料（App内課金あり）</p>
+      </div>
+      <div class="hero-flow">
+        <div class="flow-before">
+          <p class="flow-cap">純正の時計アプリ</p>
+          <div class="stock stock-sm" aria-hidden="true">
+            <div class="stock-row"><span class="stock-time">6:30</span><span class="stock-sw"></span></div>
+            <div class="stock-row"><span class="stock-time">6:40</span><span class="stock-sw"></span></div>
+            <div class="stock-row"><span class="stock-time">6:50</span><span class="stock-sw"></span></div>
+            <div class="stock-row"><span class="stock-time">6:55</span><span class="stock-sw"></span></div>
+          </div>
+        </div>
+
+        <div class="flow-arrow">
+          <img src="./img/arrow.png" width="420" height="311" alt="解決！">
+        </div>
+
+        <div class="flow-after">
+          <div class="phone"><img src="./img/shot-alarm.png" alt="Sleep Slope のアラーム画面。理想 6:20 から限界 7:00 まで、10分ごとに5回鳴る設定"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BEFORE / AFTER ============ -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="tag">なくなるもの</p>
+        <h2>毎晩オン、毎朝オフ。<br>あの作業が、まるごと消える。</h2>
+        <p>純正の時計アプリは「6時に起きたいけれど、7時までには絶対」という幅を持てません。だから10分刻みで並べることになります。</p>
+      </div>
+
+      <div class="ba rise">
+        <div class="ba-col">
+          <p class="ba-label">これまで</p>
+          <p class="ba-title">5件のアラームを、手で作る</p>
+          <div class="stock">
+            <div class="stock-row"><span class="stock-time">6:20</span><span class="stock-sw"></span></div>
+            <div class="stock-row"><span class="stock-time">6:30</span><span class="stock-sw"></span></div>
+            <div class="stock-row"><span class="stock-time">6:40</span><span class="stock-sw"></span></div>
+            <div class="stock-row"><span class="stock-time">6:50</span><span class="stock-sw"></span></div>
+            <div class="stock-row"><span class="stock-time">7:00</span><span class="stock-sw"></span></div>
+          </div>
+          <p class="ba-note">早く起きられた朝ほど、消し忘れたアラームが残ります。6時に起きたのに、6時20分、6時40分、7時と鳴り続ける。うまくいった朝ほどうんざりする、あの理不尽。</p>
+        </div>
+
+        <div class="ba-col after">
+          <p class="ba-label">Sleep Slope</p>
+          <p class="ba-title">アラームは、1件だけ</p>
+          <div class="plan-card">
+            <div class="plan-top">
+              <div class="plan-name">平日 <span>一 月・火・水・木・金</span></div>
+              <div class="plan-sw"></div>
+            </div>
+            <div class="plan-times">
+              <div class="plan-t"><div class="lb">理想</div><div class="tm">6:20</div></div>
+              <div class="plan-arrow">▶</div>
+              <div class="plan-t"><div class="lb">限界</div><div class="tm">7:00</div></div>
+            </div>
+            <div class="plan-rail">
+              <div class="rail-head">
+                <span>鳴る回数</span>
+                <span><span class="pill">10分ごと</span> &nbsp;<b>5回</b></span>
+              </div>
+              <div class="rail">
+                <div class="rail-line"></div>
+                <div class="rail-dot first" style="left:0"></div>
+                <div class="rail-dot" style="left:25%"></div>
+                <div class="rail-dot" style="left:50%"></div>
+                <div class="rail-dot" style="left:75%"></div>
+                <div class="rail-dot last" style="left:100%"></div>
+              </div>
+              <div class="rail-times"><span>6:20</span><span>6:30</span><span>6:40</span><span>6:50</span><b>7:00</b></div>
+            </div>
+          </div>
+          <p class="ba-note">理想と限界を決めれば、あいだは自動で埋まります。夜に足す手間も、朝に消す手間もありません。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section style="background:#0D0F12; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="tag">できること</p>
+        <h2>決めるのは2つだけ。<br>あとは、朝の自分に任せる。</h2>
+        <p>必要なぶんだけ鳴って、起きたら止まる。それ以上のことはしません。</p>
+      </div>
+
+      <div class="grid">
+        <div class="card rise">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <h3>理想と限界の、2つだけ</h3>
+          <p>起きたい時刻と、絶対に起きなければいけない時刻。その2つを決めれば、あいだのアラームは Sleep Slope が用意します。1件ずつ足す作業は必要ありません。</p>
+        </div>
+        <div class="card rise">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 12h16"/><circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="17" cy="12" r="2"/></svg></div>
+          <h3>鳴る回数も間隔も、好きなだけ</h3>
+          <p>3回でも10回でも。5分おきでも20分おきでも。無料のまま、回数・間隔・限界時刻に上限はありません。曜日ごとの繰り返しも設定できます。</p>
+        </div>
+        <div class="card rise">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+          <h3>起きた瞬間、残りは全部消える</h3>
+          <p>アラームを止めたあとの「起きた」のひと押しで、その日の残りが全て止まります。設定画面を開いて一つずつ消す必要はありません。</p>
+        </div>
+        <div class="card rise">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M6 9v6h3l4 3V6L9 9H6z"/><path d="M17 9c.8 1 .8 5 0 6"/></svg></div>
+          <h3>消音スイッチも、集中モードも貫く</h3>
+          <p>iOS 26 以降では OS のアラーム機能で鳴ります。消音スイッチをオンにしていても、おやすみモード中でも鳴り、ロック画面からそのまま止められます。</p>
+        </div>
+        <div class="card rise">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 016 6c0 4 2 5 2 5H4s2-1 2-5a6 6 0 016-6z"/><path d="M10 19a2 2 0 004 0"/></svg></div>
+          <h3>限界時刻だけ、強い音に</h3>
+          <p>普段は穏やかな音で。限界時刻を過ぎたら、はっきり起こしにいく音に切り替えられます。アラームごとに選べて、無料です。</p>
+        </div>
+        <div class="card rise">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M5 19V10"/><path d="M12 19V5"/><path d="M19 19v-6"/></svg></div>
+          <h3>何回目で起きたかが、残る</h3>
+          <p>起きた時刻と、限界時刻までどれだけ余裕があったかを自動で記録します。振り返るために何かを操作する必要はありません。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCREENS ============ -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="tag">使う流れ</p>
+        <h2>夜に1件つくって、<br>朝は止めるだけ。</h2>
+      </div>
+      <div class="screens">
+        <div class="screen rise">
+          <div class="phone"><img src="./img/shot-edit.png" alt="アラームを編集する画面。理想と限界の時刻、鳴る回数、音を選べる" loading="lazy"></div>
+          <h3>1. 幅を決める</h3>
+          <p>理想と限界、鳴る回数。ここだけ決めれば、あいだの時刻は自動で並びます。</p>
+        </div>
+        <div class="screen rise">
+          <div class="phone"><img src="./img/shot-ring.png" alt="アラームが鳴っている画面。1回目 / 5回、限界時刻まであと40分と表示されている" loading="lazy"></div>
+          <h3>2. 残りが見える</h3>
+          <p>いま何回目で、限界まであと何分か。わかったうえで「もう少し寝る」を選べます。</p>
+        </div>
+        <div class="screen rise">
+          <div class="phone"><img src="./img/shot-log-week.png" alt="ログ画面。早起き連続4日、平均起床 6:30、早起き率 86% と、日ごとの記録が並んでいる" loading="lazy"></div>
+          <h3>3. 記録が残る</h3>
+          <p>何回目の何時に起きたか。操作しなくても、そのまま残ります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LOG ============ -->
+  <section style="background:#0D0F12; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap split rise">
+      <div class="ph"><div class="phone"><img src="./img/shot-log-month.png" alt="ログの月表示。カレンダーで一ヶ月ぶんの起き方が見られる" loading="lazy"></div></div>
+      <div>
+        <p class="tag">ログ</p>
+        <h2>一ヶ月の起き方が、<br>そのまま残る。</h2>
+        <p>限界時刻までどれだけ余裕があったかを、日ごとに記録します。自分の朝が良くなっているのか、崩れてきているのかが見られます。</p>
+        <ul class="ticks">
+          <li>何回目のアラームで起きたか</li>
+          <li>限界時刻より早く起きられた日の連続</li>
+          <li>記録は端末の中だけ。外部に送信しません</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OTHER ============ -->
+  <section>
+    <div class="wrap split rev rise">
+      <div class="ph"><div class="phone"><img src="./img/shot-other.png" alt="その他のアラーム。赤ちゃんのミルク 3時間ごと、薬を飲む 6時間ごとのカードが並んでいる" loading="lazy"></div></div>
+      <div>
+        <p class="tag">起きるため以外にも</p>
+        <h2>一日に何度も、<br>知らせてほしいことに。</h2>
+        <p>薬を飲む、ミルクをあげる、水分をとる、姿勢を直す。開始と終了を決めれば、そのあいだを等間隔で鳴らします。同じ仕組みが、そのまま使えます。</p>
+        <ul class="ticks">
+          <li>8:00 から 23:00 まで、3時間ごとに6回</li>
+          <li>曜日ごとの繰り返しも設定できる</li>
+          <li>起床のアラームとは分けて並ぶ</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRO ============ -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="pro rise">
+        <p class="tag">Sleep Slope Pro</p>
+        <h2>無料のままでも、<br>何度でも鳴ります。</h2>
+        <p>回数も間隔も限界時刻も、無料で上限はありません。Pro は基本を解くためのものではなく、増やすためのものです。</p>
+        <div class="pro-list">
+          <div>アラームをいくつでも作れる</div>
+          <div>記録を全期間さかのぼって見られる</div>
+          <div>アラーム音が2種類から8種類に</div>
+          <div>起きたい時刻から逆算して、寝る時間をお知らせ</div>
+        </div>
+        <p class="pro-note">Pro は自動更新サブスクリプションです。料金と期間、無料お試しの有無は、アプリ内の購入画面に表示されます。解約は 設定 ＞ ご自身の名前 ＞ サブスクリプション からいつでも行えます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section style="padding-top:0;">
+    <div class="wrap faq">
+      <div class="sec-head rise">
+        <p class="tag">よくある質問</p>
+        <h2>気になるところ</h2>
+      </div>
+
+      <div class="rise">
+        <details>
+          <summary>消音にしていても鳴りますか</summary>
+          <p>iOS 26 以降では、Sleep Slope のアラームは OS のアラーム機能で鳴ります。消音スイッチをオンにしていても、おやすみモード中でも鳴り、ロック画面からそのまま止めたりスヌーズにできます。iOS 26 より前では通知として鳴るため、消音スイッチや集中モードの設定に従い、通知音は数十秒で停止します。</p>
+        </details>
+        <details>
+          <summary>限界時刻に起きられなかったら</summary>
+          <p>限界時刻を過ぎると、止めるまで5分おきに鳴り直します。一発に賭けない、というのはそういうことです。</p>
+        </details>
+        <details>
+          <summary>Apple Watch でも鳴りますか</summary>
+          <p>鳴ります。Watch 用のアプリを入れる必要はなく、アプリ側の設定もありません。鳴る時刻に Watch が iPhone とつながっていれば、手首で気づいて、そのまま止められます。</p>
+        </details>
+        <details>
+          <summary>記録は外部に送られますか</summary>
+          <p>アカウント登録はありません。起床の記録と設定は端末内にのみ保存され、外部のサーバーには送信していません。詳しくは<a href="./privacy.html">プライバシーポリシー</a>をご覧ください。</p>
+        </details>
+        <details>
+          <summary>機種変更したら記録は移せますか</summary>
+          <p>記録は端末内にのみ保存しているため、端末をまたいだ引き継ぎには対応していません。端末のバックアップ（iCloud など）を有効にしている場合は、そのバックアップに含まれます。</p>
+        </details>
+        <details>
+          <summary>うまく鳴らないときは</summary>
+          <p><a href="./index.html">サポートページ</a>に、鳴らないときの確認項目と問い合わせ先をまとめています。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING ============ -->
+  <section class="closing" style="padding-top:0;">
+    <div class="wrap rise">
+      <h2>明日の朝から、<br>アラームは1件でいい。</h2>
+      <div class="cta-row">
+        <a class="badge" href="https://apps.apple.com/jp/app/id6797730716">
+          <img src="./img/appstore-badge.svg" alt="App Store からダウンロード" loading="lazy">
+        </a>
+        <p class="req">iPhone・iOS 16.4 以上 ／ 無料（App内課金あり）</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="brand" href="./lp.html"><img src="./img/app-icon.png" alt="">Sleep Slope</a>
+      <nav class="foot-links">
+        <a href="./index.html">サポート</a>
+        <a href="./privacy.html">プライバシーポリシー</a>
+        <a href="./terms.html">利用規約</a>
+        <a href="./tokushoho.html">特定商取引法に基づく表記</a>
+        <a href="mailto:info@mellowy.site">お問い合わせ</a>
+        <a href="./en/">English</a>
+      </nav>
+    </div>
+    <p class="copy">© 2026 Tomoe Tsubota</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var targets = document.querySelectorAll('.rise');
+    if (!('IntersectionObserver' in window) ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      for (var i = 0; i < targets.length; i++) targets[i].classList.add('in');
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    targets.forEach(function (t) { io.observe(t); });
+  })();
+</script>
+</body>
+</html>
